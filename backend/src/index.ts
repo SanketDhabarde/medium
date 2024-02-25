@@ -2,6 +2,12 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign, verify } from "hono/jwt";
+import {
+  signinInput,
+  signupInput,
+  createPostInput,
+  updatePostInput,
+} from "@sanketdhabarde/common-app";
 
 const app = new Hono<{
   Bindings: { DATABASE_URL: string; JWT_SECRET: string };
@@ -37,6 +43,12 @@ app.post("/api/v1/signup", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
+  const { success } = signupInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({ error: "Invalid body" });
+  }
 
   try {
     const user = await prisma.user.create({
@@ -65,6 +77,12 @@ app.post("/api/v1/signin", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
+  const { success } = signinInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({ error: "Invalid body" });
+  }
 
   try {
     const user = await prisma.user.findUnique({
@@ -101,6 +119,13 @@ app.post("/api/v1/blog", async (c) => {
   const body = await c.req.json();
   const userId = c.get("userId");
 
+  const { success } = createPostInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({ error: "Invalid body" });
+  }
+
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -136,6 +161,12 @@ app.put("/api/v1/blog", async (c) => {
 
   const body = await c.req.json();
   const userId = c.get("userId");
+  const { success } = updatePostInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({ error: "Invalid body" });
+  }
 
   try {
     const user = await prisma.user.findUnique({
