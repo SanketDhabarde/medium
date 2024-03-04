@@ -138,7 +138,7 @@ app.post("/api/v1/blog", async (c) => {
       return c.json({ error: "Author not found" });
     }
 
-    const blog = await prisma.post.create({
+    const blog = await prisma.blog.create({
       data: {
         title: body.title,
         content: body.content,
@@ -180,7 +180,7 @@ app.put("/api/v1/blog", async (c) => {
       return c.json({ error: "Author not found" });
     }
 
-    const blog = await prisma.post.update({
+    const blog = await prisma.blog.update({
       where: {
         id: body.id,
         authorId: user.id,
@@ -208,7 +208,7 @@ app.get("/api/v1/blog/:blogId", async (c) => {
   const blogId = c.req.param("blogId");
 
   try {
-    const blog = await prisma.post.findUnique({
+    const blog = await prisma.blog.findUnique({
       where: {
         id: blogId,
         authorId: userId,
