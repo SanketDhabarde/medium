@@ -29,7 +29,7 @@ function Signin() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
       <div className="flex justify-center items-center flex-col w-full h-screen">
-        <div className="w-1/2">
+        <div className="w-4/5 md:w-1/2">
           <h1 className="font-bold text-2xl text-center">Log in account</h1>
           <p className="text-gray-400 text-center w-full">
             Don't have an account{" "}
