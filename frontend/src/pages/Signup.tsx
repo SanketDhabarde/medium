@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Quote from "../components/Quote";
 import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
@@ -13,6 +13,7 @@ function Signup() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
@@ -22,6 +23,7 @@ function Signup() {
       );
       const jwt = response.data.token;
       localStorage.setItem("token", jwt);
+      navigate("/blogs");
     } catch (error) {
       console.log(error);
     }
