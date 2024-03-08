@@ -40,6 +40,7 @@ userRouter.post("/signup", async (c) => {
 
     return c.json({ msg: "User created", token });
   } catch (error) {
+    console.log(error);
     c.status(500);
     return c.json({ error: "Something went wrong" });
   }
