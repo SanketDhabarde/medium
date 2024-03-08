@@ -1,5 +1,6 @@
 import Appbar from "../components/Appbar";
 import Avatar from "../components/Avatar";
+import BLogDetailSkeleton from "../components/BLogDetailSkeleton";
 import { useBlog } from "../hooks/useBlog";
 
 function BlogDetails() {
@@ -10,7 +11,7 @@ function BlogDetails() {
       <Appbar />
       <div className="flex flex-col justify-center items-center w-full mt-10">
         {isLoading ? (
-          <div>Loading....</div>
+          <BLogDetailSkeleton />
         ) : (
           <div className="max-w-screen-lg p-2">
             <h1 className="text-4xl font-bold">{title}</h1>
@@ -24,7 +25,11 @@ function BlogDetails() {
                 content.length / 100
               )} min read`}</div>
             </div>
-            <img src={blogImage} alt="blog thumbnail" className="my-3 w-full" />
+            <img
+              src={blogImage}
+              alt="blog thumbnail"
+              className="my-3 h-56 w-full object-cover"
+            />
             <div className="text-lg">{content}</div>
           </div>
         )}

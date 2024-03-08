@@ -1,6 +1,7 @@
 import Blog from "../components/Blog";
 import Appbar from "../components/Appbar";
 import { useBlogs } from "../hooks/useBlogs";
+import BlogSkeleton from "../components/Skeleton";
 
 function Blogs() {
   const { isLoading, blogs } = useBlogs();
@@ -8,8 +9,13 @@ function Blogs() {
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <Appbar />
+
       {isLoading ? (
-        <div>Loading...</div>
+        <>
+          <BlogSkeleton />
+          <BlogSkeleton />
+          <BlogSkeleton />
+        </>
       ) : (
         blogs?.map((blog) => <Blog {...blog} key={blog.id} />)
       )}
