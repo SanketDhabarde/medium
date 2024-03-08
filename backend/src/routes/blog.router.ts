@@ -161,6 +161,18 @@ blogRouter.get("/:blogId", async (c) => {
       where: {
         id: blogId,
       },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        blogImage: true,
+        author: {
+          select: {
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
     });
 
     if (!blog) {

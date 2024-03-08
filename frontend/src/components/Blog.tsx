@@ -9,7 +9,7 @@ const Blog = ({ id, title, content, author, blogImage }: BlogType) => {
       className="w-11/12 lg:w-1/2 my-3 border-b-2 border-slate-50 p-3"
     >
       <div className="flex items-center gap-2">
-        <Avatar name={author.name} profileImage={author.profileImage} />
+        <Avatar type="small" name={author.name} profileImage={author.profileImage} />
         <div className="w-1 h-1 bg-slate-500 rounded-full"></div>
         <div className="text-sm text-slate-500">Dec 3, 2023</div>
       </div>

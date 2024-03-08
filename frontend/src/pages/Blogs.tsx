@@ -11,7 +11,7 @@ function Blogs() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        blogs?.map((blog) => <Blog {...blog} />)
+        blogs?.map((blog) => <Blog {...blog} key={blog.id} />)
       )}
     </div>
   );
