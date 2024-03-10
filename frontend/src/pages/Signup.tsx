@@ -35,7 +35,7 @@ function Signup() {
         <div className="w-4/5 md:w-1/2">
           <h1 className="font-bold text-2xl text-center">Create an account</h1>
           <p className="text-gray-400 text-center w-full">
-            Already have an account{" "}
+            Already have an account
             <Link to="/signin" className="underline">
               Sign in
             </Link>

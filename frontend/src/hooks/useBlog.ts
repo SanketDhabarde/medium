@@ -9,10 +9,8 @@ export const useBlog = () => {
     id: "",
     title: "",
     content: "",
-    blogImage: "string",
     author: {
       name: "string",
-      profileImage: "string",
     },
   });
   const [isLoading, setIsLoading] = useState(false);
