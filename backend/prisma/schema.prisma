@@ -18,7 +18,6 @@ model User {
   email        String  @unique
   password     String
   name         String?
-  profileImage String  @default("https://as2.ftcdn.net/v2/jpg/04/10/43/77/1000_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg")
   blogs        Blog[]
 }
 
@@ -27,7 +26,6 @@ model Blog {
   title      String
   content    String
   published  Boolean @default(false)
-  blogImage  String  @default("https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png")
   authorId   Int
   author     User    @relation(fields: [authorId], references: [id])
 }

@@ -132,11 +132,9 @@ blogRouter.get("/bulk", async (c) => {
         id: true,
         title: true,
         content: true,
-        blogImage: true,
         author: {
           select: {
             name: true,
-            profileImage: true,
           },
         },
       },
@@ -165,11 +163,9 @@ blogRouter.get("/:blogId", async (c) => {
         id: true,
         title: true,
         content: true,
-        blogImage: true,
         author: {
           select: {
             name: true,
-            profileImage: true,
           },
         },
       },
