@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Quote from "../components/Quote";
 import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
@@ -6,13 +6,16 @@ import { SignInInput } from "@sanketdhabarde/common-app";
 import { useState } from "react";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import { useAuth } from "../context/auth-context";
 
 function Signin() {
   const [input, setInput] = useState<SignInInput>({
     email: "",
     password: "",
   });
+  const { saveUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = async () => {
     try {
@@ -22,7 +25,8 @@ function Signin() {
       );
       const jwt = response.data.token;
       localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      saveUser(response.data.user);
+      navigate(location?.state?.from?.pathname || "/blogs", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +38,7 @@ function Signin() {
         <div className="w-4/5 md:w-1/2">
           <h1 className="font-bold text-2xl text-center">Log in account</h1>
           <p className="text-gray-400 text-center w-full">
-            Don't have an account{" "}
+            Don't have an account?{" "}
             <Link to="/signup" className="underline">
               Sign up
             </Link>
@@ -49,7 +53,7 @@ function Signin() {
           <LabelledInput
             label="password"
             type="password"
-            placeholder=""
+            placeholder="123456"
             value={input.password}
             onChange={(e) => setInput({ ...input, password: e.target.value })}
           />

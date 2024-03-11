@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Quote from "../components/Quote";
 import LabelledInput from "../components/LabelledInput";
 import Button from "../components/Button";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SignupInput } from "@sanketdhabarde/common-app";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useAuth } from "../context/auth-context";
 
 function Signup() {
   const [input, setInput] = useState<SignupInput>({
@@ -13,7 +14,9 @@ function Signup() {
     email: "",
     password: "",
   });
+  const { saveUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = async () => {
     try {
@@ -23,7 +26,8 @@ function Signup() {
       );
       const jwt = response.data.token;
       localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      saveUser(response.data.user);
+      navigate(location?.state?.from?.pathname || "/blogs", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +39,7 @@ function Signup() {
         <div className="w-4/5 md:w-1/2">
           <h1 className="font-bold text-2xl text-center">Create an account</h1>
           <p className="text-gray-400 text-center w-full">
-            Already have an account
+            Already have an account?{" "}
             <Link to="/signin" className="underline">
               Sign in
             </Link>
@@ -55,7 +59,7 @@ function Signup() {
           <LabelledInput
             label="password"
             type="password"
-            placeholder=""
+            placeholder="123456"
             value={input.password}
             onChange={(e) => setInput({ ...input, password: e.target.value })}
           />

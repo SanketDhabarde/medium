@@ -10,7 +10,6 @@ function BlogDetails() {
   return (
     <div>
       <Appbar />
-
       <div className="flex flex-col justify-center items-center w-full mt-10">
         {isLoading ? (
           <BLogDetailSkeleton />
