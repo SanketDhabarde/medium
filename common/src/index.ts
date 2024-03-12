@@ -24,6 +24,7 @@ export const createPostInput = z.object({
 export type CreatePostInput = z.infer<typeof createPostInput>;
 
 export const updatePostInput = z.object({
+  id: z.string(),
   title: z.string().optional(),
   content: z.string().optional(),
   published: z.boolean().optional(),

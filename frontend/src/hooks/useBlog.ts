@@ -4,13 +4,14 @@ import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import { Blog } from "./useBlogs";
 
-export const useBlog = () => {
+export const useBlog = (isEdit: boolean) => {
   const [blog, setBlog] = useState<Blog>({
     id: "",
     title: "",
     content: "",
     author: {
-      name: "string",
+      id: 0,
+      name: "",
     },
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,7 @@ export const useBlog = () => {
 
   useEffect(() => {
     getBlog(id || "");
-  }, [id]);
+  }, [id, isEdit]);
 
   const getBlog = async (id: string) => {
     try {

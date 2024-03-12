@@ -111,9 +111,12 @@ blogRouter.put("/", async (c) => {
         title: body.title,
         content: body.content,
       },
+      select: {
+        id: true,
+      },
     });
 
-    return c.json({ msg: "updated post" });
+    return c.json({ msg: "updated post", id: blog.id });
   } catch (error) {
     console.log(error);
     c.status(500);
@@ -134,6 +137,7 @@ blogRouter.get("/bulk", async (c) => {
         content: true,
         author: {
           select: {
+            id: true,
             name: true,
           },
         },
@@ -165,6 +169,7 @@ blogRouter.get("/:blogId", async (c) => {
         content: true,
         author: {
           select: {
+            id: true,
             name: true,
           },
         },
