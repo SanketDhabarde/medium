@@ -135,6 +135,7 @@ blogRouter.get("/bulk", async (c) => {
         id: true,
         title: true,
         content: true,
+        publishedDate: true,
         author: {
           select: {
             id: true,
@@ -167,6 +168,7 @@ blogRouter.get("/:blogId", async (c) => {
         id: true,
         title: true,
         content: true,
+        publishedDate: true,
         author: {
           select: {
             id: true,
@@ -181,6 +183,30 @@ blogRouter.get("/:blogId", async (c) => {
     }
 
     return c.json({ blog });
+  } catch (error) {
+    console.log(error);
+    c.status(500);
+    return c.json({ error: "Something went wrong" });
+  }
+});
+
+blogRouter.delete("/:blogId", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const blogId = c.req.param("blogId");
+  const userId = c.get("userId");
+
+  try {
+    await prisma.blog.delete({
+      where: {
+        id: blogId,
+        authorId: userId,
+      },
+    });
+
+    return c.json({ msg: "deleted blog!" });
   } catch (error) {
     console.log(error);
     c.status(500);

@@ -8,19 +8,19 @@ const Appbar = () => {
     localStorage.clear();
   };
   return (
-    <div className="flex justify-between items-center w-full px-7 py-3 border-b-2 border-slate-50 mb-2">
+    <div className="flex justify-between items-center w-full px-7 py-3 border-b-2 border-slate-100 mb-2">
       <Link to={"/blogs"} className="font-bold">
         Medium
       </Link>
       <div className="flex justify-center items-center gap-6">
-        <Link to={"/create"} className="flex gap-1">
+        <Link to={"/create"} className="flex gap-1 text-slate-500 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-5 h-5"
           >
             <path
               strokeLinecap="round"
@@ -30,7 +30,7 @@ const Appbar = () => {
           </svg>
           Write
         </Link>
-        <button onClick={handleLogout}>
+        <button onClick={handleLogout} className="text-slate-500">
           logout
         </button>
         <div
