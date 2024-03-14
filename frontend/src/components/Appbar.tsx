@@ -10,7 +10,7 @@ const Appbar = () => {
   return (
     <div className="flex justify-between items-center w-full px-7 py-3 border-b-2 border-slate-100 mb-2">
       <Link to={"/blogs"} className="font-bold">
-        Medium
+        Blog App
       </Link>
       <div className="flex justify-center items-center gap-6">
         <Link to={"/create"} className="flex gap-1 text-slate-500 items-center">
