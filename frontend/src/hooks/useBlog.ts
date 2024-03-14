@@ -9,6 +9,7 @@ export const useBlog = (isEdit: boolean) => {
     id: "",
     title: "",
     content: "",
+    publishedDate: new Date(),
     author: {
       id: 0,
       name: "",
