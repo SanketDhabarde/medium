@@ -1,6 +1,6 @@
 <div align="center">
 
-# Blog App ▶
+# Blog App ✍
 
 </div>
 
